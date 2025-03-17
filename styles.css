@@ -152,7 +152,7 @@ button:active {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
   #sidebar.mobile-hidden {
     transform: translateX(-100%);
   }
