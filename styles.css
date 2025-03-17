@@ -54,6 +54,7 @@ pre {
 /* Interactive elements styling */
 .interactive-playground {
   transition: all 0.3s ease;
+  z-index: 10;
   position: relative;
   border: 1px solid rgba(79, 70, 229, 0.2);
 }
