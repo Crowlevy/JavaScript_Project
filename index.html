@@ -1,0 +1,2005 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interativo - Aprenda JS de forma prática</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "highlight.js": "https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/+esm",
+                "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm",
+                "chart.js": "https://cdn.jsdelivr.net/npm/chart.js@4.3.0/+esm"
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="lg:w-72 w-full bg-gradient-to-b from-indigo-900 to-purple-900 text-white p-4 flex flex-col lg:fixed lg:h-screen overflow-y-auto transition-all duration-300 z-40">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white rounded-lg p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-2xl font-bold">JS Interativo</h1>
+                </div>
+                <button id="menuToggle" class="lg:hidden text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Progress bar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium">Seu progresso</span>
+                    <span id="progressText" class="text-xs font-semibold">0% Completo</span>
+                </div>
+                <div class="w-full bg-indigo-300 bg-opacity-30 rounded-full h-2">
+                    <div id="progressBar" class="progress-bar w-0"></div>
+                </div>
+            </div>
+            
+            <nav class="flex-grow">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#intro" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                            Introdução
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#variables" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Variáveis e Tipos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#operators" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            Operadores e Estruturas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#functions" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                            </svg>
+                            Funções
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dom" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                            Manipulação DOM
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#async" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            JavaScript Assíncrono
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modern" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                            </svg>
+                            JavaScript Moderno
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#frameworks" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            Frameworks
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#advanced" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            Conceitos Avançados
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#market" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Mercado
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#project" class="nav-link flex items-center p-3 hover:bg-indigo-800 rounded-md transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Projeto Final
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="mt-auto pt-4 border-t border-indigo-800 text-sm text-indigo-300">
+                <div class="flex items-center justify-between mb-2">
+                    <p>Modo escuro</p>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="darkModeToggle" class="sr-only peer">
+                        <div class="relative w-11 h-6 bg-gray-600 rounded-full peer peer-checked:bg-indigo-400">
+                            <div class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full transition-all peer-checked:left-5"></div>
+                        </div>
+                    </label>
+                </div>
+                <p> 2023 JavaScript Interativo</p>
+                <p>Todos os direitos reservados</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-grow lg:ml-72 p-4 transition-all duration-300">
+            <!-- Intro Section -->
+            <section id="intro" class="mb-16">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-8 text-white mb-8">
+                    <h2 class="text-4xl font-bold mb-4">Aprenda JavaScript Interativamente</h2>
+                    <p class="text-xl">Bem-vindo à plataforma interativa de aprendizado JavaScript. Explore conceitos, experimente código em tempo real e domine a linguagem que move a web.</p>
+                    <div class="mt-6 flex space-x-4">
+                        <button class="bg-white text-indigo-600 px-6 py-2 rounded-full font-bold hover:bg-indigo-100 transition">Começar Agora</button>
+                        <button class="border border-white text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:bg-opacity-20 transition">Ver Tópicos</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                        <div class="text-indigo-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Conteúdo Interativo</h3>
+                        <p class="text-gray-600">Aprenda na prática, testando e modificando códigos em tempo real.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                        <div class="text-indigo-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Visualizações Dinâmicas</h3>
+                        <p class="text-gray-600">Animações e gráficos que tornam os conceitos abstratos fáceis de entender.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                        <div class="text-indigo-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Do Básico ao Avançado</h3>
+                        <p class="text-gray-600">Estrutura progressiva, começando do zero até os conceitos mais avançados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Variables Section -->
+            <section id="variables" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 border-b pb-2">Variáveis e Tipos de Dados</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-xl font-semibold mb-4">Declaração de Variáveis</h3>
+                    <p class="mb-4">JavaScript oferece três formas de declarar variáveis:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-2 text-red-600">var</h4>
+                            <p class="text-sm mb-2">Escopo de função, pode ser redeclarada e atualizada.</p>
+                            <pre class="bg-gray-800 text-white p-2 rounded"><code>var idade = 25;
+var idade = 26; // Permitido</code></pre>
+                        </div>
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-2 text-green-600">let</h4>
+                            <p class="text-sm mb-2">Escopo de bloco, pode ser atualizada mas não redeclarada.</p>
+                            <pre class="bg-gray-800 text-white p-2 rounded"><code>let nome = "Ana";
+nome = "João"; // Permitido
+// let nome = "Pedro"; // Erro</code></pre>
+                        </div>
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-2 text-blue-600">const</h4>
+                            <p class="text-sm mb-2">Escopo de bloco, não pode ser atualizada nem redeclarada.</p>
+                            <pre class="bg-gray-800 text-white p-2 rounded"><code>const PI = 3.14;
+// PI = 3.15; // Erro
+// const PI = 3.15; // Erro</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="interactive-playground bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Experimente:</h4>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <textarea id="variableCode" rows="5" class="w-full p-2 border rounded font-mono">// Experimente declarar variáveis aqui
+let mensagem = "Olá, mundo!";
+console.log(mensagem);</textarea>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white p-2 border rounded min-h-[128px]">
+                                    <p class="font-semibold">Resultado:</p>
+                                    <pre id="variableResult" class="text-sm"></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="runVariableCode" class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Executar</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Tipos de Dados em JavaScript</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-bold mb-2">Tipos Primitivos</h4>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><span class="font-semibold">String:</span> Texto entre aspas ("Olá")</li>
+                                <li><span class="font-semibold">Number:</span> Números inteiros ou decimais (42, 3.14)</li>
+                                <li><span class="font-semibold">Boolean:</span> true ou false</li>
+                                <li><span class="font-semibold">Undefined:</span> Valor padrão para variáveis não inicializadas</li>
+                                <li><span class="font-semibold">Null:</span> Representa a ausência intencional de valor</li>
+                                <li><span class="font-semibold">Symbol:</span> Valor único e imutável (ES6+)</li>
+                                <li><span class="font-semibold">BigInt:</span> Números inteiros muito grandes (ES2020)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">Tipos de Referência</h4>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><span class="font-semibold">Object:</span> Coleção de pares chave-valor</li>
+                                <li><span class="font-semibold">Array:</span> Lista ordenada de valores</li>
+                                <li><span class="font-semibold">Function:</span> Bloco de código reutilizável</li>
+                                <li><span class="font-semibold">Date:</span> Representa datas e horários</li>
+                                <li><span class="font-semibold">RegExp:</span> Expressões regulares</li>
+                                <li><span class="font-semibold">Map:</span> Coleção de pares chave-valor (ES6+)</li>
+                                <li><span class="font-semibold">Set:</span> Coleção de valores únicos (ES6+)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="interactive-playground bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Verificar Tipo:</h4>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <textarea id="typeCheckCode" rows="5" class="w-full p-2 border rounded font-mono">// Insira qualquer valor para verificar seu tipo
+const valor = [1, 2, 3];
+console.log(typeof valor);
+console.log(Array.isArray(valor));</textarea>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white p-2 border rounded min-h-[128px]">
+                                    <p class="font-semibold">Resultado:</p>
+                                    <pre id="typeCheckResult" class="text-sm"></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="runTypeCheck" class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Verificar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Operators Section -->
+            <section id="operators" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Operadores e Estruturas de Controle</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Operadores</span>
+                        <h3 class="text-xl font-semibold mb-4">Operadores em JavaScript</h3>
+                        <p class="mb-4">JavaScript possui vários tipos de operadores que permitem realizar diversas operações:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            <div class="border rounded p-3 bg-gray-50">
+                                <h4 class="font-semibold mb-1 text-indigo-700">Aritméticos</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li><code>+</code> - Adição</li>
+                                    <li><code>-</code> - Subtração</li>
+                                    <li><code>*</code> - Multiplicação</li>
+                                    <li><code>/</code> - Divisão</li>
+                                    <li><code>%</code> - Resto</li>
+                                    <li><code>**</code> - Exponenciação</li>
+                                </ul>
+                            </div>
+                            <div class="border rounded p-3 bg-gray-50">
+                                <h4 class="font-semibold mb-1 text-indigo-700">Comparação</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li><code>==</code> - Igual a (valor)</li>
+                                    <li><code>===</code> - Igual a (valor e tipo)</li>
+                                    <li><code>!=</code> - Diferente de (valor)</li>
+                                    <li><code>!==</code> - Diferente de (valor e tipo)</li>
+                                    <li><code>&gt;</code>, <code>&lt;</code> - Maior que, Menor que</li>
+                                    <li><code>&gt;=</code>, <code>&lt;=</code> - Maior ou igual, Menor ou igual</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="code-container relative">
+                            <pre class="code-example bg-gray-800 text-white p-4 rounded"><code class="language-javascript">// Exemplos de operadores
+let a = 10, b = 3;
+
+// Aritméticos
+console.log(a + b);  // 13
+console.log(a - b);  // 7
+console.log(a * b);  // 30
+console.log(a / b);  // 3.3333...
+console.log(a % b);  // 1
+console.log(a ** b); // 1000
+
+// Comparação
+console.log(a == "10");   // true (compara apenas valor)
+console.log(a === "10");  // false (compara valor e tipo)
+console.log(a != b);      // true
+console.log(a > b);       // true</code></pre>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-3">Experimente os operadores aritméticos:</h4>
+                            <form id="operatorForm" class="bg-gray-50 p-4 rounded-lg">
+                                <div class="grid grid-cols-3 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Número 1</label>
+                                        <input type="number" id="num1" value="10" class="w-full p-2 border rounded">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Operador</label>
+                                        <select id="operator" class="w-full p-2 border rounded">
+                                            <option value="+">+</option>
+                                            <option value="-">-</option>
+                                            <option value="*">*</option>
+                                            <option value="/">/</option>
+                                            <option value="%">%</option>
+                                            <option value="**">**</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Número 2</label>
+                                        <input type="number" id="num2" value="5" class="w-full p-2 border rounded">
+                                    </div>
+                                </div>
+                                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Calcular</button>
+                            </form>
+                            <div id="operatorResult" class="mt-4 p-3 bg-gray-100 rounded min-h-[60px]"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Controle de Fluxo</span>
+                        <h3 class="text-xl font-semibold mb-4">Estruturas de Controle</h3>
+                        <p class="mb-4">As estruturas de controle permitem alterar o fluxo de execução do código baseado em condições.</p>
+                        
+                        <div class="accordion mb-4">
+                            <button class="accordion-button flex items-center justify-between w-full p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition">
+                                <span class="font-semibold">Estrutura if...else</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-content overflow-hidden max-h-0 transition-all">
+                                <div class="p-4 border-t">
+                                    <p class="mb-2">Executa um bloco de código se uma condição for verdadeira, ou outro bloco se for falsa.</p>
+                                    <div class="code-container relative">
+                                        <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">let hora = 14;
+
+if (hora < 12) {
+  console.log("Bom dia!");
+} else if (hora < 18) {
+  console.log("Boa tarde!");
+} else {
+  console.log("Boa noite!");
+}
+// Resultado: "Boa tarde!"</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion mb-4">
+                            <button class="accordion-button flex items-center justify-between w-full p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition">
+                                <span class="font-semibold">Estrutura switch</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-content overflow-hidden max-h-0 transition-all">
+                                <div class="p-4 border-t">
+                                    <p class="mb-2">Avalia uma expressão e executa o código correspondente ao caso que corresponder ao valor.</p>
+                                    <div class="code-container relative">
+                                        <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">let dia = "quarta";
+
+switch (dia) {
+  case "segunda":
+    console.log("Início da semana");
+    break;
+  case "quarta":
+    console.log("Meio da semana");
+    break;
+  case "sexta":
+    console.log("Fim da semana!");
+    break;
+  default:
+    console.log("Outro dia da semana");
+}
+// Resultado: "Meio da semana"</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion mb-4">
+                            <button class="accordion-button flex items-center justify-between w-full p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition">
+                                <span class="font-semibold">Loops (for, while, do...while)</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="accordion-content overflow-hidden max-h-0 transition-all">
+                                <div class="p-4 border-t">
+                                    <p class="mb-2">Loops permitem executar um bloco de código repetidamente.</p>
+                                    <div class="code-container relative">
+                                        <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Loop for
+for (let i = 0; i < 3; i++) {
+  console.log(`Iteração ${i}`);
+}
+
+// Loop while
+let contador = 0;
+while (contador < 3) {
+  console.log(`While: ${contador}`);
+  contador++;
+}
+
+// Loop do...while
+let j = 0;
+do {
+  console.log(`Do-while: ${j}`);
+  j++;
+} while (j < 3);</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                            <h4 class="font-semibold text-yellow-800 mb-1">Dica profissional</h4>
+                            <p class="text-sm text-yellow-700">Use o operador ternário para condições simples em uma única linha:</p>
+                            <pre class="bg-yellow-100 p-2 rounded mt-2 text-xs"><code>let status = idade >= 18 ? "Adulto" : "Menor";</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Functions Section -->
+            <section id="functions" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Funções: O Coração do JavaScript</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="lg:col-span-2 section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Fundamentos</span>
+                        <h3 class="text-xl font-semibold mb-4">Declaração e Tipos de Funções</h3>
+                        
+                        <p class="mb-4">Funções são blocos de código reutilizáveis que executam tarefas específicas e podem retornar valores. No JavaScript moderno, existem várias formas de declarar funções:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-4 rounded"><code class="language-javascript">// Função tradicional
+function somar(a, b) {
+  return a + b;
+}
+
+// Expressão de função
+const multiplicar = function(a, b) {
+  return a * b;
+};
+
+// Arrow function
+const dividir = (a, b) => a / b;
+
+// Função com parâmetros padrão
+function saudar(nome = "Visitante") {
+  return `Olá, ${nome}!`;
+}
+
+console.log(somar(5, 3));       // 8
+console.log(multiplicar(4, 2)); // 8
+console.log(dividir(10, 2));    // 5
+console.log(saudar());          // "Olá, Visitante!"
+console.log(saudar("Ana"));     // "Olá, Ana!"</code></pre>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold mb-2 text-indigo-700">Características das funções em JavaScript:</h4>
+                                
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span><strong>Funções são objetos de primeira classe</strong>: podem ser atribuídas a variáveis, passadas como argumentos e retornadas por outras funções.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span><strong>Arrow functions</strong>: sintaxe mais concisa e não têm o próprio <code>this</code>, mantendo o escopo externo.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span><strong>Parâmetros padrão</strong>: permitem definir valores para parâmetros caso nenhum seja fornecido.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span><strong>Rest parameters</strong>: capturam um número indefinido de argumentos como um array.</span>
+                                    </li>
+                                </ul>
+                                
+                                <div class="mt-4 p-3 bg-indigo-50 rounded-md">
+                                    <h5 class="font-semibold text-indigo-800 mb-1">Quando usar cada tipo?</h5>
+                                    <ul class="text-sm space-y-1 text-indigo-700">
+                                        <li>• Use <strong>funções tradicionais</strong> quando precisar da palavra-chave <code>this</code> ou do objeto <code>arguments</code>.</li>
+                                        <li>• Use <strong>arrow functions</strong> para callbacks curtos e quando quiser preservar o contexto do <code>this</code>.</li>
+                                        <li>• Use <strong>parâmetros padrão</strong> para tornar suas funções mais robustas e flexíveis.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-3">Demonstração Interativa de Funções:</h4>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <select id="functionType" class="border rounded p-2">
+                                    <option value="regular">Função Tradicional</option>
+                                    <option value="arrow">Arrow Function</option>
+                                    <option value="callback">Função Callback</option>
+                                </select>
+                                <button id="functionDemo" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Ver Exemplo</button>
+                            </div>
+                            <div id="functionResult" class="mt-2 min-h-[150px]"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Avançado</span>
+                        <h3 class="text-xl font-semibold mb-4">Closures & Callbacks</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-indigo-700 mb-2">Closures</h4>
+                            <p class="text-sm mb-2">Uma closure é uma função que tem acesso a variáveis do escopo externo, mesmo depois que esse escopo é finalizado.</p>
+                            
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Exemplo de closure
+function criarContador() {
+  let contador = 0;
+  
+  return function() {
+    contador++;
+    return contador;
+  };
+}
+
+const meuContador = criarContador();
+console.log(meuContador()); // 1
+console.log(meuContador()); // 2
+console.log(meuContador()); // 3
+
+// A variável 'contador' está
+// encapsulada dentro da closure</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-indigo-700 mb-2">Higher-Order Functions</h4>
+                            <p class="text-sm mb-2">São funções que recebem outras funções como argumentos ou retornam funções.</p>
+                            
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Exemplo de higher-order function
+// map, filter e reduce são exemplos
+// de higher-order functions
+
+const numeros = [1, 2, 3, 4, 5];
+
+// map: transforma cada elemento
+const dobro = numeros.map(n => n * 2);
+// [2, 4, 6, 8, 10]
+
+// filter: seleciona elementos
+const pares = numeros.filter(n => n % 2 === 0);
+// [2, 4]
+
+// reduce: acumula valores
+const soma = numeros.reduce(
+  (total, n) => total + n, 0
+);
+// 15</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                            <h4 class="font-semibold text-blue-800 mb-1">Aplicações práticas</h4>
+                            <p class="text-sm text-blue-700">Funções como <code>map</code>, <code>filter</code> e <code>reduce</code> são essenciais para programação funcional em JavaScript, permitindo código mais limpo e declarativo.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DOM Manipulation Section -->
+            <section id="dom" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Manipulação do DOM</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md section-card mb-10">
+                    <span class="topic-pill">Elementos HTML</span>
+                    <h3 class="text-xl font-semibold mb-4">Seleção e Manipulação de Elementos</h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <p class="mb-4">O DOM (Document Object Model) é uma representação estruturada do documento HTML, permitindo que o JavaScript acesse e modifique elementos da página.</p>
+                            
+                            <h4 class="font-semibold text-indigo-700 mb-2">Métodos para seleção de elementos:</h4>
+                            <div class="code-container relative mb-4">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Selecionar por ID
+const elemento = document.getElementById("meuId");
+
+// Selecionar por classe (retorna coleção)
+const elementos = document.getElementsByClassName("minhaClasse");
+
+// Selecionar por tag (retorna coleção)
+const paragrafos = document.getElementsByTagName("p");
+
+// Método moderno usando seletores CSS
+const primeiro = document.querySelector(".minhaClasse");
+const todos = document.querySelectorAll("div.item");</code></pre>
+                            </div>
+                            
+                            <h4 class="font-semibold text-indigo-700 mb-2">Modificação de elementos:</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Modificar conteúdo
+elemento.textContent = "Novo texto";
+elemento.innerHTML = "<strong>HTML</strong> modificado";
+
+// Modificar atributos
+elemento.setAttribute("href", "https://exemplo.com");
+elemento.id = "novoId";
+
+// Modificar estilos
+elemento.style.color = "blue";
+elemento.style.fontSize = "16px";
+
+// Adicionar/remover classes
+elemento.classList.add("destaque");
+elemento.classList.remove("oculto");
+elemento.classList.toggle("ativo");</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-indigo-700 mb-3">Demonstração Interativa do DOM:</h4>
+                            <div id="demoElement" class="p-4 border rounded transition-all duration-300 mb-6 text-center">
+                                Este é um elemento HTML que você pode modificar em tempo real!
+                            </div>
+                            
+                            <form id="domControlForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Cor do texto</label>
+                                    <select id="textColor" class="w-full p-2 border rounded">
+                                        <option value="">Padrão</option>
+                                        <option value="red">Vermelho</option>
+                                        <option value="#4F46E5">Indigo</option>
+                                        <option value="green">Verde</option>
+                                        <option value="#6B21A8">Roxo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Cor de fundo</label>
+                                    <select id="bgColor" class="w-full p-2 border rounded">
+                                        <option value="">Padrão</option>
+                                        <option value="#FEF3C7">Amarelo claro</option>
+                                        <option value="#DBEAFE">Azul claro</option>
+                                        <option value="#D1FAE5">Verde claro</option>
+                                        <option value="#F3E8FF">Roxo claro</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Tamanho da fonte</label>
+                                    <input type="range" id="fontSize" min="12" max="32" value="16" class="w-full">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Border radius</label>
+                                    <input type="range" id="borderRadius" min="0" max="24" value="4" class="w-full">
+                                </div>
+                            </form>
+                            
+                            <div class="mt-4 p-3 bg-gray-100 rounded">
+                                <p class="text-sm font-medium mb-1">Código JavaScript gerado:</p>
+                                <pre class="text-xs bg-white p-2 rounded"><code id="domCode"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md section-card">
+                    <span class="topic-pill">Eventos</span>
+                    <h3 class="text-xl font-semibold mb-4">Manipulação de Eventos no DOM</h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <p class="mb-4">Eventos permitem que você execute código JavaScript em resposta a interações do usuário ou mudanças no documento.</p>
+                            
+                            <h4 class="font-semibold text-indigo-700 mb-2">Principais tipos de eventos:</h4>
+                            <ul class="grid grid-cols-2 gap-2 mb-6">
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">click</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">dblclick</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">mouseenter</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">mouseleave</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">keydown</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">keyup</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">submit</code>
+                                </li>
+                                <li class="flex items-center text-sm">
+                                    <span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
+                                    <code class="bg-gray-100 px-1 rounded">change</code>
+                                </li>
+                            </ul>
+                            
+                            <h4 class="font-semibold text-indigo-700 mb-2">Adicionando event listeners:</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Método moderno para adicionar eventos
+elemento.addEventListener("click", function(event) {
+  console.log("Elemento clicado!");
+  console.log(event); // objeto do evento
+});
+
+// Com arrow function
+elemento.addEventListener("mouseover", (e) => {
+  e.target.style.color = "red";
+});
+
+// Removendo event listener
+function meuHandler() {
+  console.log("Handler executado");
+}
+elemento.addEventListener("click", meuHandler);
+elemento.removeEventListener("click", meuHandler);</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-indigo-700 mb-3">Demonstração de Eventos:</h4>
+                            <p class="mb-4">Interaja com os elementos abaixo para ver os eventos em ação:</p>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="p-4 border rounded text-center cursor-pointer hover:bg-gray-50 transition" onclick="this.style.backgroundColor = getRandomColor(); this.textContent = 'Clicado!';">
+                                    Clique aqui
+                                </div>
+                                
+                                <div class="p-4 border rounded text-center cursor-pointer hover:bg-gray-50 transition" onmouseover="this.classList.add('scale-110', 'shadow-md', 'transition')" onmouseout="this.classList.remove('scale-110', 'shadow-md')">
+                                    Passe o mouse
+                                </div>
+                                
+                                <div class="p-4 border rounded text-center">
+                                    <input type="text" class="border p-2 w-full rounded mb-2" placeholder="Digite algo..." oninput="document.getElementById('outputText').textContent = this.value">
+                                    <div id="outputText" class="text-sm text-gray-500">Saída aparecerá aqui</div>
+                                </div>
+                                
+                                <div class="p-4 border rounded text-center" data-count="0" onclick="
+                                    const counter = parseInt(this.dataset.count) + 1;
+                                    this.dataset.count = counter;
+                                    this.querySelector('span').textContent = counter;
+                                    if (counter >= 10) this.style.backgroundColor = '#D1FAE5';
+                                ">
+                                    Contador: <span>0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 bg-indigo-50 rounded-md">
+                                <h5 class="font-semibold text-indigo-800 mb-2">Sobre o Event Bubbling</h5>
+                                <p class="text-sm text-indigo-700 mb-3">Eventos em JavaScript "borbulham" dos elementos internos para os externos. Isso significa que um evento em um elemento filho também ativará o mesmo evento em seus elementos pai.</p>
+                                <div class="code-container relative">
+                                    <pre class="code-example bg-indigo-100 text-indigo-900 p-2 rounded text-xs"><code class="language-javascript">// Parar a propagação do evento
+elemento.addEventListener("click", (e) => {
+  e.stopPropagation();
+});</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Async Section -->
+            <section id="async" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">JavaScript Assíncrono</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Conceitos</span>
+                        <h3 class="text-xl font-semibold mb-4">Da Callback à Promise ao Async/Await</h3>
+                        
+                        <p class="mb-4">JavaScript é naturalmente single-threaded, mas permite operações assíncronas para tarefas que podem levar tempo, como solicitações de rede ou operações de arquivo.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-indigo-700 mb-2">Callbacks</h4>
+                            <p class="text-sm mb-2">A abordagem mais antiga para lidar com operações assíncronas:</p>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Usando callback para operação assíncrona
+function buscarDados(callback) {
+  setTimeout(() => {
+    const dados = { nome: "João", idade: 30 };
+    callback(dados);
+  }, 1000);
+}
+
+buscarDados((dados) => {
+  console.log(dados); // { nome: "João", idade: 30 }
+});</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-indigo-700 mb-2">Promises</h4>
+                            <p class="text-sm mb-2">Uma maneira mais elegante de lidar com operações assíncronas:</p>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Usando Promise para operação assíncrona
+function buscarDados() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const sucesso = true;
+      
+      if (sucesso) {
+        const dados = { nome: "Maria", idade: 25 };
+        resolve(dados);
+      } else {
+        reject("Erro ao buscar dados");
+      }
+    }, 1000);
+  });
+}
+
+buscarDados()
+  .then(dados => {
+    console.log(dados); // { nome: "Maria", idade: 25 }
+  })
+  .catch(erro => {
+    console.error(erro);
+  });</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-indigo-700 mb-2">Async/Await</h4>
+                            <p class="text-sm mb-2">Sintaxe moderna que torna o código assíncrono mais legível, parecendo síncrono:</p>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Usando async/await
+async function obterDados() {
+  try {
+    const dados = await buscarDados();
+    console.log(dados); // { nome: "Maria", idade: 25 }
+    
+    // Pode encadear mais operações assíncronas
+    const maisDetalhes = await buscarDetalhes(dados.nome);
+    console.log(maisDetalhes);
+  } catch (erro) {
+    console.error("Ocorreu um erro:", erro);
+  }
+}
+
+obterDados();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Prática</span>
+                        <h3 class="text-xl font-semibold mb-4">Aplicação Assíncrona com Fetch API</h3>
+                        
+                        <p class="mb-4">A Fetch API é usada para fazer solicitações HTTP e é baseada em Promises, tornando-a perfeita para operações assíncronas.</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Buscar dados com a Fetch API
+fetch('https://api.exemplo.com/dados')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Resposta da rede não foi ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Problema na busca:', error);
+  });
+
+// A mesma busca com async/await
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.exemplo.com/dados');
+    if (!response.ok) {
+      throw new Error('Resposta da rede não foi ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Problema na busca:', error);
+  }
+}</code></pre>
+                        </div>
+                        
+                        <h4 class="font-semibold text-indigo-700 mb-3">Demonstração de API Fetch:</h4>
+                        <button id="fetchDataBtn" class="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition mb-4">
+                            Buscar Dados de Usuários
+                        </button>
+                        
+                        <div id="loadingIndicator" class="hidden flex justify-center items-center py-8">
+                            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+                        </div>
+                        
+                        <div id="userData" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modern JS Section -->
+            <section id="modern" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">JavaScript Moderno (ES6+)</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md section-card mb-12">
+                    <span class="topic-pill">ES6 e além</span>
+                    <h3 class="text-xl font-semibold mb-4">Recursos Modernos do JavaScript</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Desestruturação</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// Desestruturação de objetos
+const pessoa = {
+  nome: 'Ana', 
+  idade: 28
+};
+const { nome, idade } = pessoa;
+
+// Desestruturação de arrays
+const cores = ['vermelho', 'azul'];
+const [primaria, secundaria] = cores;</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Spread/Rest</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// Spread operator
+const array1 = [1, 2, 3];
+const array2 = [...array1, 4, 5];
+// [1, 2, 3, 4, 5]
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 };
+// { a: 1, b: 2, c: 3 }
+
+// Rest parameters
+function soma(...numeros) {
+  return numeros.reduce(
+    (total, n) => total + n, 0
+  );
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Template Literals</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// Strings com interpolação
+const nome = 'Maria';
+const msg = `Olá, ${nome}!`;
+// "Olá, Maria!"
+
+// Strings multilinhas
+const html = `
+<div>
+  <h1>Título</h1>
+  <p>Parágrafo</p>
+</div>
+`;
+
+// Tagged templates
+function tag(strings, ...values) {
+  console.log(strings, values);
+  return 'Resultado';
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Módulos ES</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// arquivo math.js
+export function somar(a, b) {
+  return a + b;
+}
+export const PI = 3.14159;
+
+// Em outro arquivo
+import { somar, PI } from './math.js';
+import * as math from './math.js';
+
+// Export default
+export default class Usuario {
+  // ...
+}
+
+import Usuario from './usuario.js';</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Map e Set</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// Map - coleção de pares chave-valor
+const mapa = new Map();
+mapa.set('chave1', 'valor1');
+mapa.set(42, 'resposta');
+mapa.get('chave1'); // 'valor1'
+
+// Set - coleção de valores únicos
+const conjunto = new Set();
+conjunto.add(1);
+conjunto.add(2);
+conjunto.add(1); // ignorado
+conjunto.size; // 2</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg p-4 hover:shadow-md transition">
+                            <h4 class="font-bold text-lg mb-2">Novos métodos de Array</h4>
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded text-sm"><code class="language-javascript">// find, findIndex
+const numeros = [5, 12, 8, 130, 44];
+const found = numeros.find(n => n > 10);
+// 12
+
+// includes
+[1, 2, 3].includes(2); // true
+
+// flat, flatMap
+const arr = [1, 2, [3, 4]];
+arr.flat(); // [1, 2, 3, 4]
+
+// at (ES2022)
+const ultimo = [1, 2, 3].at(-1); // 3</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-violet-500 to-purple-500 rounded-lg shadow-lg p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">Evolução do JavaScript</h3>
+                    <p class="mb-6">O JavaScript tem passado por grandes evoluções desde o lançamento do ES6 (2015). Confira algumas features importantes por ano:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                            <h4 class="font-bold text-lg mb-2">ES6/ES2015</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Arrow Functions</li>
+                                <li>• Classes</li>
+                                <li>• Template Literals</li>
+                                <li>• Promises</li>
+                                <li>• let e const</li>
+                                <li>• Módulos</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                            <h4 class="font-bold text-lg mb-2">ES2017-ES2019</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• async/await</li>
+                                <li>• Object.entries/values</li>
+                                <li>• String padStart/padEnd</li>
+                                <li>• Array.flat/flatMap</li>
+                                <li>• Object Rest/Spread</li>
+                                <li>• Optional catch binding</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                            <h4 class="font-bold text-lg mb-2">ES2020-ES2022</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• Nullish coalescing (??)</li>
+                                <li>• Optional chaining (?.)</li>
+                                <li>• Promise.allSettled</li>
+                                <li>• Private class fields</li>
+                                <li>• Array.at</li>
+                                <li>• Top-level await</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Frameworks Section -->
+            <section id="frameworks" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Frameworks e Bibliotecas</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md col-span-1 lg:col-span-3">
+                        <span class="topic-pill">Comparação</span>
+                        <h3 class="text-xl font-semibold mb-4">Comparativo dos Frameworks Populares</h3>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Framework</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Abordagem</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pontos Fortes</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Casos de Uso</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aprendizado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-blue-100 rounded-md">
+                                                    <svg viewBox="0 0 24 24" class="h-6 w-6 text-blue-600" fill="currentColor">
+                                                        <path d="M12 10.11c1.03 0 1.87.84 1.87 1.89 0 1-.84 1.85-1.87 1.85-1.03 0-1.87-.85-1.87-1.85 0-1.05.84-1.89 1.87-1.89M7.37 20c.63.38 2.01-.2 3.6-1.7-.52-.59-1.03-1.23-1.51-1.9a22.7 22.7 0 01-2.4-.36c-.51 2.14-.32 3.61.31 3.96m.71-5.74l-.29-.51c-.11.29-.22.58-.29.86.27.06.57.11.88.16l-.3-.51m6.54-.76l.81-1.5-.81-1.5c-.3-.53-.62-1-.91-1.47C13.17 9 12.6 9 12 9c-.6 0-1.17 0-1.71.03-.29.47-.61.94-.91 1.47L8.57 12l.81 1.5c.3.53.62 1 .91 1.47.54.03 1.11.03 1.71.03.6 0 1.17 0 1.71-.03.29-.47.61-.94.91-1.47M12 6.78c-.19.22-.39.45-.59.72h1.18c-.2-.27-.4-.5-.59-.72m0 10.44c.19-.22.39-.45.59-.72h-1.18c.2.27.4.5.59.72M16.62 4c-.62-.38-2 .2-3.59 1.7.52.59 1.03 1.23 1.51 1.9.82.08 1.63.2 2.4.36.51-2.14.32-3.61-.32-3.96m-.7 5.74l.29.51c.11-.29.22-.58.29-.86-.27-.06-.57-.11-.88-.16l.3.51m1.45-7.05c1.47.84 1.63 3.05 1.01 5.63 2.54.75 4.37 1.99 4.37 3.68 0 1.69-1.83 2.93-4.37 3.68.62 2.58.46 4.79-1.01 5.63-1.46.84-3.45-.12-5.37-1.95-1.92 1.83-3.91 2.79-5.38 1.95-1.46-.84-1.62-3.05-1-5.63-2.54-.75-4.37-1.99-4.37-3.68 0-1.69 1.83-2.93 4.37-3.68-.62-2.58-.46-4.79 1-5.63 1.47-.84 3.46.12 5.38 1.95 1.92-1.83 3.91-2.79 5.37-1.95M17.08 12c.34.75.64 1.5.89 2.26 2.1-.63 3.28-1.53 3.28-2.26 0-.73-1.18-1.63-3.28-2.26-.25.76-.55 1.51-.89 2.26M6.92 12c-.34-.75-.64-1.5-.89-2.26-2.1.63-3.28 1.53-3.28 2.26 0 .73 1.18 1.63 3.28 2.26.25-.76.55-1.51.89-2.26m9 2.26l-.3.51c.31-.05.61-.1.88-.16-.07-.28-.18-.57-.29-.86l-.29.51m-2.89 4.04c1.59 1.5 2.97 2.08 3.59 1.7.64-.35.83-1.82.32-3.96-.77.16-1.58.28-2.4.36-.48.67-.99 1.31-1.51 1.9M8.08 9.74l.3-.51c-.31.05-.61.1-.88.16.07.28.18.57.29.86l.29-.51m2.89-4.04C9.38 4.2 8 3.62 7.37 4c-.63.35-.82 1.82-.31 3.96a22.7 22.7 0 012.4-.36c.48-.67.99-1.31 1.51-1.9z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">React</div>
+                                                    <div class="text-xs text-gray-500">Meta (Facebook)</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Biblioteca para construção de interfaces com abordagem de componentes e Virtual DOM
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            <ul class="list-disc pl-4">
+                                                <li>Flexibilidade</li>
+                                                <li>Ecossistema vasto</li>
+                                                <li>Forte comunidade</li>
+                                                <li>Bom desempenho</li>
+                                            </ul>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            SPAs, aplicações em grande escala, aplicações com componentes reutilizáveis
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Moderado
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-green-100 rounded-md">
+                                                    <svg viewBox="0 0 24 24" class="h-6 w-6 text-green-600" fill="currentColor">
+                                                        <path d="M2,3H5.5L12,15L18.5,3H22L12,21L2,3M6.5,3H9.5L12,7.58L14.5,3H17.5L12,13.17L6.5,3Z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Vue.js</div>
+                                                    <div class="text-xs text-gray-500">Evan You</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Framework progressivo com sistema de templates e reatividade
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            <ul class="list-disc pl-4">
+                                                <li>Facilidade de aprendizado</li>
+                                                <li>Documentação excelente</li>
+                                                <li>Versatilidade</li>
+                                                <li>Adoção gradual</li>
+                                            </ul>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            Projetos pequenos a médios, protótipos, aplicações com adoção progressiva
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Fácil
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-red-100 rounded-md">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Angular</div>
+                                                    <div class="text-xs text-gray-500">Google</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Framework completo com TypeScript, injeção de dependência e arquitetura MVC
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            <ul class="list-disc pl-4">
+                                                <li>Estrutura completa</li>
+                                                <li>Uso extensivo de TypeScript</li>
+                                                <li>Injeção de dependência</li>
+                                                <li>Ideal para equipes</li>
+                                            </ul>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            Aplicações empresariais, projetos grandes e complexos, equipes grandes
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Difícil
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Frontend</span>
+                        <h3 class="text-xl font-semibold mb-4">React: A Biblioteca Popular</h3>
+                        
+                        <p class="mb-4">React é uma biblioteca JavaScript para construção de interfaces de usuário, focada em componentes e fluxo de dados unidirecional.</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-jsx">// Componente funcional com Hooks
+import React, { useState, useEffect } from 'react';
+
+function Contador() {
+  // Estado do componente
+  const [contador, setContador] = useState(0);
+  
+  // Efeito colateral
+  useEffect(() => {
+    document.title = `Contador: ${contador}`;
+  }, [contador]);
+  
+  return (
+    <div>
+      <p>Você clicou {contador} vezes</p>
+      <button onClick={() => setContador(contador + 1)}>
+        Incrementar
+      </button>
+    </div>
+  );
+}
+
+export default Contador;</code></pre>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-md mb-4">
+                            <h4 class="font-semibold text-blue-700 mb-1">Principais conceitos do React</h4>
+                            <ul class="text-sm text-blue-700 space-y-1">
+                                <li>• Componentes: A base do React, permitindo separar a UI em partes independentes e reutilizáveis</li>
+                                <li>• JSX: Extensão de sintaxe que mistura HTML com JavaScript</li>
+                                <li>• Virtual DOM: Representação em memória do DOM real para otimizar atualizações</li>
+                                <li>• Props: Dados passados de componentes pais para filhos</li>
+                                <li>• State: Dados locais e gerenciados dentro de um componente</li>
+                                <li>• Hooks: Funções que permitem usar estado e outros recursos do React em componentes funcionais</li>
+                            </ul>
+                        </div>
+                        
+                        <p class="text-sm text-gray-600">O ecossistema React inclui ferramentas como Redux (gerenciamento de estado), React Router (navegação), Next.js (framework para SSR e SSG) e muito mais.</p>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Backend</span>
+                        <h3 class="text-xl font-semibold mb-4">Node.js e Express</h3>
+                        
+                        <p class="mb-4">Node.js permitiu que JavaScript fosse executado fora do navegador, abrindo caminho para desenvolvimento backend com JavaScript.</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Servidor básico com Express
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Middleware para processar JSON
+app.use(express.json());
+
+// Definindo rotas
+app.get('/', (req, res) => {
+  res.send('Olá, mundo!');
+});
+
+// Rota com parâmetros
+app.get('/usuarios/:id', (req, res) => {
+  const id = req.params.id;
+  // Buscar usuário do banco de dados
+  res.json({ id, nome: 'Usuário exemplo' });
+});
+
+// Rota POST
+app.post('/usuarios', (req, res) => {
+  const novoUsuario = req.body;
+  // Salvar no banco de dados
+  res.status(201).json(novoUsuario);
+});
+
+// Iniciando servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});</code></pre>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-md">
+                            <h4 class="font-semibold text-green-700 mb-2">Vantagens do Node.js</h4>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>• Mesma linguagem no frontend e backend</li>
+                                <li>• I/O não bloqueante e orientado a eventos</li>
+                                <li>• Excelente para APIs e microsserviços</li>
+                                <li>• NPM: Maior repositório de bibliotecas do mundo</li>
+                                <li>• Comunidade ativa e em crescimento</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Mobile</span>
+                        <h3 class="text-xl font-semibold mb-4">React Native</h3>
+                        
+                        <p class="mb-4">React Native permite desenvolver aplicativos móveis nativos para iOS e Android usando JavaScript e React.</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-jsx">import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+
+const App = () => {
+  const [contador, setContador] = useState(0);
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>
+        Bem-vindo ao React Native!
+      </Text>
+      <Text style={styles.contador}>
+        Contador: {contador}
+      </Text>
+      <Button
+        title="Incrementar"
+        onPress={() => setContador(contador + 1)}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  titulo: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  contador: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 20,
+  },
+});
+
+export default App;</code></pre>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-md">
+                            <h4 class="font-semibold text-purple-700 mb-1">Por que React Native?</h4>
+                            <ul class="text-sm text-purple-700 space-y-1">
+                                <li>• Um único código base para iOS e Android</li>
+                                <li>• Componentes nativos em vez de WebViews</li>
+                                <li>• Hot Reloading para desenvolvimento rápido</li>
+                                <li>• Grande comunidade e suporte corporativo</li>
+                                <li>• Compartilhamento de lógica entre web e mobile</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Section -->
+            <section id="advanced" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Conceitos Avançados</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Avançado</span>
+                        <h3 class="text-xl font-semibold mb-4">Hoisting</h3>
+                        
+                        <p class="mb-4">Hoisting é o comportamento do JavaScript de mover declarações para o topo do escopo atual antes da execução do código.</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Exemplo de hoisting
+console.log(x); // undefined (não erro!)
+var x = 5;
+console.log(x); // 5
+
+// O que realmente acontece:
+// var x;        // declaração é "içada"
+// console.log(x);
+// x = 5;
+// console.log(x);</code></pre>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-md">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Importante!</h4>
+                            <p class="text-sm text-yellow-700">Apenas as declarações são içadas, não as inicializações. Com <code>let</code> e <code>const</code>, as declarações também são içadas, mas não são inicializadas, criando uma "Temporal Dead Zone".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Avançado</span>
+                        <h3 class="text-xl font-semibold mb-4">Event Loop</h3>
+                        
+                        <p class="mb-4">O Event Loop é o mecanismo que permite que o JavaScript execute operações não-bloqueantes, apesar de ser single-threaded.</p>
+                        
+                        <div class="event-loop-demo p-4 bg-gray-100 rounded-lg mb-6">
+                            <div class="flex justify-center mb-4">
+                                <svg id="eventLoopAnimation" class="w-64 h-64" viewBox="0 0 200 200">
+                                    <circle cx="100" cy="100" r="70" fill="none" stroke="#4F46E5" stroke-width="2" stroke-dasharray="5 2"></circle>
+                                    <rect id="callStackBlock" x="70" y="30" width="60" height="40" rx="4" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"></rect>
+                                    <text x="100" y="55" text-anchor="middle" font-size="8" fill="#000">Call Stack</text>
+                                    <rect id="callbackQueueBlock" x="70" y="130" width="60" height="40" rx="4" fill="#DEF7EC" stroke="#10B981" stroke-width="2"></rect>
+                                    <text x="100" y="155" text-anchor="middle" font-size="8" fill="#000">Callback Queue</text>
+                                    <circle id="eventLoopCircle" cx="100" cy="100" r="10" fill="#4F46E5"></circle>
+                                </svg>
+                            </div>
+                            <button id="runEventLoop" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
+                                Simular Event Loop
+                            </button>
+                        </div>
+                        
+                        <p class="text-sm">O Event Loop constantemente verifica se a Call Stack está vazia. Quando está, ele pega a primeira callback da fila e a coloca na stack para execução.</p>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Avançado</span>
+                        <h3 class="text-xl font-semibold mb-4">Prototypes e Herança</h3>
+                        
+                        <p class="mb-4">JavaScript usa um sistema de herança baseado em protótipos, não em classes (mesmo com a sintaxe de classe do ES6).</p>
+                        
+                        <div class="code-container relative mb-6">
+                            <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Objeto construtor
+function Animal(nome) {
+  this.nome = nome;
+}
+
+// Adicionando método ao protótipo
+Animal.prototype.falar = function() {
+  return `${this.nome} faz algum som.`;
+};
+
+// Herança via protótipo
+function Cachorro(nome, raca) {
+  Animal.call(this, nome); // "super()"
+  this.raca = raca;
+}
+
+// Conectando protótipos para herança
+Cachorro.prototype = Object.create(Animal.prototype);
+Cachorro.prototype.constructor = Cachorro;
+
+// Sobrescrevendo o método do protótipo
+Cachorro.prototype.falar = function() {
+  return `${this.nome} late!`;
+};
+
+const rex = new Cachorro('Rex', 'Labrador');
+console.log(rex.falar()); // "Rex late!"</code></pre>
+                        </div>
+                        
+                        <div class="prototype-chain bg-indigo-50 p-3 rounded flex items-center justify-center">
+                            <div class="prototype-object p-2 bg-white border border-indigo-300 rounded">
+                                <span class="text-xs font-semibold">rex</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                            <div class="prototype-object p-2 bg-white border border-indigo-300 rounded">
+                                <span class="text-xs font-semibold">Cachorro.prototype</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                            <div class="prototype-object p-2 bg-white border border-indigo-300 rounded">
+                                <span class="text-xs font-semibold">Animal.prototype</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Section -->
+            <section id="market" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Mercado de Trabalho</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Carreira</span>
+                        <h3 class="text-xl font-semibold mb-4">Oportunidades para Desenvolvedores JavaScript</h3>
+                        
+                        <div class="mb-6">
+                            <div id="marketChart" class="h-64 w-full bg-gray-50 rounded-lg"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-indigo-50 p-4 rounded">
+                                <h4 class="font-semibold text-indigo-700 mb-2">Áreas em destaque</h4>
+                                <ul class="space-y-1 text-sm">
+                                    <li>• Desenvolvimento Web Frontend</li>
+                                    <li>• Desenvolvimento Backend com Node.js</li>
+                                    <li>• Desenvolvimento Mobile com React Native</li>
+                                    <li>• DevOps e CI/CD com ferramentas JS</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded">
+                                <h4 class="font-semibold text-green-700 mb-2">Salários médios</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex justify-between">
+                                        <span>Jr. Developer:</span>
+                                        <span class="font-medium">R$ 3.500 - 5.000</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Pleno Developer:</span>
+                                        <span class="font-medium">R$ 6.000 - 9.000</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Sr. Developer:</span>
+                                        <span class="font-medium">R$ 10.000 - 15.000</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Tech Lead:</span>
+                                        <span class="font-medium">R$ 14.000 - 20.000+</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card bg-white p-6 rounded-lg shadow-md">
+                        <span class="topic-pill">Tendências</span>
+                        <h3 class="text-xl font-semibold mb-4">O Futuro do JavaScript</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="perspective-card" style="height: 200px;">
+                                <div class="card-flip h-full w-full relative">
+                                    <div class="card-front absolute w-full h-full bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg p-5 flex flex-col justify-center items-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                        </svg>
+                                        <h4 class="text-lg font-bold">Inteligência Artificial</h4>
+                                        <p class="text-center text-sm">Passe o mouse para saber mais</p>
+                                    </div>
+                                    <div class="card-back absolute w-full h-full bg-white rounded-lg p-5 shadow-lg">
+                                        <h5 class="font-semibold text-indigo-600 mb-2">JavaScript + IA</h5>
+                                        <p class="text-sm">As bibliotecas JavaScript para IA e machine learning (como TensorFlow.js e Brain.js) estão tornando possível executar modelos de ML diretamente no navegador.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="perspective-card" style="height: 200px;">
+                                <div class="card-flip h-full w-full relative">
+                                    <div class="card-front absolute w-full h-full bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg p-5 flex flex-col justify-center items-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                        <h4 class="text-lg font-bold">WebAssembly (WASM)</h4>
+                                        <p class="text-center text-sm">Passe o mouse para saber mais</p>
+                                    </div>
+                                    <div class="card-back absolute w-full h-full bg-white rounded-lg p-5 shadow-lg">
+                                        <h5 class="font-semibold text-blue-600 mb-2">JavaScript + WASM</h5>
+                                        <p class="text-sm">WebAssembly está ampliando as capacidades do JavaScript, permitindo executar código de alto desempenho de outras linguagens diretamente no navegador.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-hidden relative rounded-lg mb-6">
+                            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-90"></div>
+                            <div class="relative p-6 text-white">
+                                <h4 class="text-xl font-bold mb-4">Tendências para os próximos anos</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <span class="inline-block w-2 h-2 bg-white rounded-full mt-1.5 mr-2"></span>
+                                        <span>Frameworks meta (como Astro, Remix e Next.js)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="inline-block w-2 h-2 bg-white rounded-full mt-1.5 mr-2"></span>
+                                        <span>Edge computing com JavaScript</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="inline-block w-2 h-2 bg-white rounded-full mt-1.5 mr-2"></span>
+                                        <span>Expansão de TypeScript e ferramentas de tipagem</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="inline-block w-2 h-2 bg-white rounded-full mt-1.5 mr-2"></span>
+                                        <span>Avanços em Web Components e micro-frontends</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded">
+                            <h4 class="font-semibold mb-2">Habilidades complementares valorizadas:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">TypeScript</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">CI/CD</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">Testing</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">Git & GitHub</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">Soft Skills</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">Clean Code</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">Docker</span>
+                                <span class="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium">UX Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Section -->
+            <section id="project" class="mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="feature-icon mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold border-b-0 pb-0">Projeto Final</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md section-card mb-12">
+                    <span class="topic-pill">Desafio</span>
+                    <h3 class="text-xl font-semibold mb-4">Todo List App</h3>
+                    
+                    <p class="mb-6">Coloque em prática tudo o que você aprendeu criando um aplicativo de lista de tarefas completo usando JavaScript puro (Vanilla JS).</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+                        <div>
+                            <h4 class="font-semibold text-indigo-700 mb-4">Instruções do Projeto</h4>
+                            
+                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                                <h5 class="font-medium mb-2">Requisitos:</h5>
+                                <ol class="list-decimal pl-5 space-y-2 text-sm">
+                                    <li>Criar, editar e excluir tarefas</li>
+                                    <li>Marcar tarefas como concluídas</li>
+                                    <li>Filtrar tarefas (todas, ativas, concluídas)</li>
+                                    <li>Salvar tarefas no localStorage</li>
+                                    <li>Design responsivo</li>
+                                    <li>Animações sutis para melhorar a UX</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                                <h5 class="font-medium text-yellow-800 mb-2">Bônus (desafios extras):</h5>
+                                <ul class="list-disc pl-5 space-y-2 text-sm text-yellow-700">
+                                    <li>Adicionar categorias/tags para tarefas</li>
+                                    <li>Implementar drag-and-drop para reordenar tarefas</li>
+                                    <li>Adicionar modo escuro</li>
+                                    <li>Criar uma visualização de calendário</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="code-container relative">
+                                <pre class="code-example bg-gray-800 text-white p-3 rounded"><code class="language-javascript">// Estrutura básica para iniciar o projeto
+
+// 1. Selecione os elementos DOM
+const todoForm = document.getElementById('todo-form');
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+const filters = document.querySelectorAll('.filter');
+
+// 2. Array para armazenar tarefas
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+// 3. Função para renderizar tarefas
+function renderTodos() {
+  todoList.innerHTML = '';
+  
+  // Filtrar tarefas com base no filtro ativo
+  // Renderizar cada tarefa
+  // Adicionar event listeners aos botões
+}
+
+// 4. Função para adicionar nova tarefa
+function addTodo(e) {
+  e.preventDefault();
+  
+  const todoText = todoInput.value.trim();
+  if (todoText) {
+    const todo = {
+      id: Date.now(),
+      text: todoText,
+      completed: false
+    };
+    
+    todos.push(todo);
+    saveToLocalStorage();
+    renderTodos();
+    todoInput.value = '';
+  }
+}
+
+// 5. Função para salvar no localStorage
+function saveToLocalStorage() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+// 6. Event listeners
+todoForm.addEventListener('submit', addTodo);
+
+// 7. Inicialização
+renderTodos();</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-indigo-700 mb-4">Preview da Aplicação</h4>
+                            
+                            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                                <div class="bg-white rounded-lg shadow-sm p-4">
+                                    <h5 class="text-lg font-semibold mb-3">Minhas Tarefas</h5>
+                                    
+                                    <div class="mb-4">
+                                        <form id="project-demo-form" class="flex">
+                                            <input type="text" placeholder="Adicionar nova tarefa..." class="flex-grow px-4 py-2 border rounded-l focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-r hover:bg-indigo-700 transition">
+                                                Adicionar
+                                            </button>
+                                        </form>
+                                    </div>
+                                    
+                                    <div class="flex space-x-2 mb-4">
+                                        <button class="px-3 py-1 bg-indigo-600 text-white rounded text-sm">Todas</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm">Ativas</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm">Concluídas</button>
+                                    </div>
+                                    
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center p-2 bg-gray-50 rounded">
+                                            <input type="checkbox" class="mr-3" checked>
+                                            <span class="flex-grow line-through text-gray-500">Aprender JavaScript básico</span>
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </li>
+                                        <li class="flex items-center p-2 bg-gray-50 rounded">
+                                            <input type="checkbox" class="mr-3">
+                                            <span class="flex-grow">Estudar manipulação do DOM</span>
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </li>
+                                        <li class="flex items-center p-2 bg-gray-50 rounded">
+                                            <input type="checkbox" class="mr-3">
+                                            <span class="flex-grow">Praticar com projetos reais</span>
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    
+                                    <div class="mt-4 text-sm text-gray-500 text-right">
+                                        2 tarefas restantes
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-indigo-50 p-5 rounded-lg">
+                                <h5 class="font-semibold text-indigo-700 mb-3">Aproveite o projeto para aplicar:</h5>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>
+                                            <strong class="text-indigo-700">Manipulação DOM:</strong> Selecionar elementos, criar elementos dinamicamente, manipular classes...
+                                        </span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>
+                                            <strong class="text-indigo-700">Eventos:</strong> Lidar com submissão de formulário, cliques, mudanças em inputs...
+                                        </span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>
+                                            <strong class="text-indigo-700">Armazenamento local:</strong> Persistir dados no navegador via localStorage...
+                                        </span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span>
+                                            <strong class="text-indigo-700">Arrays e Objetos:</strong> Usar métodos de array como filter, map e reduce...
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-4">Próximos Passos</h4>
+                        <p class="mb-4">Parabéns por chegar até aqui! Agora que você domina os fundamentos do JavaScript, aqui estão algumas sugestões para continuar sua jornada:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                                <h5 class="font-bold mb-2">Aprofunde-se</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Aprenda TypeScript</li>
+                                    <li>• Estude padrões de design</li>
+                                    <li>• Domine testes automatizados</li>
+                                    <li>• Explore arquitetura de software</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                                <h5 class="font-bold mb-2">Especialize-se</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Frontend com React/Vue/Angular</li>
+                                    <li>• Backend com Node.js</li>
+                                    <li>• Mobile com React Native</li>
+                                    <li>• DevOps para JavaScript</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-sm">
+                                <h5 class="font-bold mb-2">Construa</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Projetos para seu portfólio</li>
+                                    <li>• Contribua para open source</li>
+                                    <li>• Participe de hackathons</li>
+                                    <li>• Compartilhe conhecimento</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="text-center py-8">
+                <button id="loadMoreContent" class="bg-indigo-600 text-white px-6 py-3 rounded-full font-bold hover:bg-indigo-700 transition">
+                    Carregar Mais Conteúdo
+                </button>
+                <p class="mt-4 text-gray-500">Em desenvolvimento: mais seções estão sendo adicionadas</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Helper function for DOM examples
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
