@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+// No import statements
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -168,39 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateIntroElements() {
         if (!gsap) return;
 
-        // Animate the intro elements with GSAP
-        gsap.from('#intro h2', { 
-            duration: 1, 
-            y: -50, 
-            opacity: 0, 
-            ease: 'power3.out'
-        });
-        
-        gsap.from('#intro p', { 
-            duration: 1, 
-            y: -30, 
-            opacity: 0, 
-            delay: 0.3, 
-            ease: 'power3.out'
-        });
-        
-        gsap.from('#intro button', { 
-            duration: 0.8, 
-            y: 20, 
-            opacity: 0, 
-            delay: 0.6, 
-            stagger: 0.2, 
-            ease: 'back.out(1.7)'
-        });
-        
-        gsap.from('.grid > div', { 
-            duration: 0.6, 
-            y: 30, 
-            opacity: 0, 
-            delay: 0.8, 
-            stagger: 0.15, 
-            ease: 'power2.out'
-        });
+        // Set elements to their final state immediately without animations
+        gsap.set('#intro h2', { opacity: 1, y: 0 });
+        gsap.set('#intro p', { opacity: 1, y: 0 });
+        gsap.set('#intro button', { opacity: 1, y: 0 });
+        gsap.set('.grid > div', { opacity: 1, y: 0 });
     }
 
     function setupResponsiveMenu() {
@@ -585,7 +557,7 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
             const copyButton = document.createElement('button');
             copyButton.className = 'absolute top-2 right-2 bg-gray-700 text-white p-1 rounded opacity-70 hover:opacity-100 transition';
             copyButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
             `;
@@ -595,14 +567,14 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
                 navigator.clipboard.writeText(code);
                 
                 copyButton.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 `;
                 
                 setTimeout(() => {
                     copyButton.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                     `;
@@ -830,22 +802,6 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
         });
     }
 
-    document.getElementById('loadMoreContent').addEventListener('click', function() {
-        this.textContent = 'Carregando...';
-        this.disabled = true;
-        
-        setTimeout(() => {
-            this.textContent = 'Todo o conteúdo foi carregado';
-            this.classList.add('bg-green-600');
-            this.classList.remove('hover:bg-indigo-700');
-            
-            const message = document.createElement('p');
-            message.textContent = 'Novas seções serão adicionadas em breve!';
-            message.className = 'mt-4 text-indigo-600 font-semibold';
-            this.parentNode.appendChild(message);
-        }, 1500);
-    });
-
     function setupScrollAnimation() {
         const sections = document.querySelectorAll('section');
         
@@ -856,17 +812,12 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
                     const title = section.querySelector('h2');
                     const content = Array.from(section.children).filter(el => el !== title);
                     
+                    // Immediately make content visible without animations
                     if (title) {
-                        gsap.fromTo(title, 
-                            { opacity: 0, y: -30 }, 
-                            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-                        );
+                        gsap.set(title, { opacity: 1, y: 0 });
                     }
                     
-                    gsap.fromTo(content, 
-                        { opacity: 0, y: 30 }, 
-                        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }
-                    );
+                    gsap.set(content, { opacity: 1, y: 0 });
                     
                     observer.unobserve(section);
                 }
@@ -878,7 +829,6 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
         });
     }
 
-    // New function to enhance interactivity throughout the site
     function setupInteractiveElements() {
         // Make section cards interactive
         document.querySelectorAll('.section-card').forEach(card => {

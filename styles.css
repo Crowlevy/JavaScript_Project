@@ -11,11 +11,11 @@ pre {
   overflow-x: auto;
 }
 
-/* Animation for code examples */
+/* Enhanced animations for code examples */
 .code-animation {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
 }
 
 @keyframes fadeInUp {
@@ -45,44 +45,45 @@ pre {
   animation: pulse 2s infinite;
 }
 
-/* Active section highlighting */
-.nav-link.active {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-left: 3px solid white;
-}
-
-/* Interactive elements styling */
+/* Interactive elements styling with enhanced feedback */
 .interactive-playground {
   transition: all 0.3s ease;
-  z-index: 10;
   position: relative;
   border: 1px solid rgba(79, 70, 229, 0.2);
+  overflow: hidden;
+}
+
+.interactive-playground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1;
+  transition: all 0.8s ease;
+}
+
+.interactive-playground:hover::before {
+  left: 100%;
 }
 
 .interactive-playground:hover {
   box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
   border-color: rgba(79, 70, 229, 0.4);
+  transform: translateY(-2px);
 }
 
-.interactive-playground::after {
-  content: "Interativo";
-  position: absolute;
-  top: -10px;
-  right: 10px;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  color: white;
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-weight: bold;
-  opacity: 0;
-  transform: translateY(5px);
-  transition: all 0.3s ease;
-}
-
-.interactive-playground:hover::after {
-  opacity: 1;
-  transform: translateY(0);
+/* Active section highlighting */
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 3px solid white;
 }
 
 /* Better animations for accordion */
@@ -135,13 +136,14 @@ button:active {
 
 /* Animate-fade-in utility class */
 .animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    opacity: 1;
+    transform: translateY(0);
   }
   to {
     opacity: 1;
@@ -167,14 +169,16 @@ button:active {
 }
 
 /* Enhanced Design Elements */
+/* Enhanced section cards with better transitions */
 .section-card {
   border-left: 4px solid #4f46e5;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
 }
 
 .section-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.15);
 }
 
 .code-example {
@@ -234,6 +238,42 @@ button:active {
 
 .card-back {
   transform: rotateY(180deg);
+}
+
+/* New interactive button styles */
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-interactive::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-interactive:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(100, 100);
+    opacity: 0;
+  }
 }
 
 /* Fancy scrollbar */
