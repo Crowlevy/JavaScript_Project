@@ -619,7 +619,7 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
         sections.forEach(section => observer.observe(section));
     }
 
-    function setupDarkModeToggle() {
+    /*function setupDarkModeToggle() {
         const darkModeToggle = document.getElementById('darkModeToggle');
         const html = document.documentElement;
 
@@ -642,7 +642,7 @@ elemento.style.borderRadius = '${borderRadius ? borderRadius + 'px' : 'initial'}
                 localStorage.setItem('darkMode', 'false');
             }
         });
-    }
+    }*/
 
     function setupAccordions() {
         const accordionButtons = document.querySelectorAll('.accordion-button');
